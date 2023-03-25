@@ -20,7 +20,7 @@ const SpringExample = () => {
       x: 0,
     },
     to: {
-      x: 200,
+      x: 150,
     },
     loop: true,
     config: {
