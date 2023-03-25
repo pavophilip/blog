@@ -7,8 +7,8 @@ const Container = styled.div`
 `;
 
 const Ball = animated(styled.div`
-  width: 100px;
-  height: 100px;
+  width: 64px;
+  height: 64px;
   background-color: #4f4f4f;
   border-radius: 50%;
 `);
