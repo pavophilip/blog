@@ -13,7 +13,7 @@ const StyledSvg = styled.svg`
   cursor: pointer;
   z-index: 5;
   overflow: visible;
-  scale: 6;
+  scale: 8;
   margin-top: 100px;
 
   & > rect {
