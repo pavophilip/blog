@@ -18,13 +18,22 @@ const nextConfig = {
   // Configure pageExtensions to include md and mdx
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   // Optionally, add any other Next.js config below
-  reactStrictMode: true,
+  reactStrictMode: false,
 
   compiler: {
     emotion: true,
     styledComponents: {
       ssr: true,
     },
+  },
+
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.module.rules.push({
+      test: /\.(vert|frag|glsl)$/i,
+      loader: "raw-loader",
+    });
+
+    return config;
   },
 };
 

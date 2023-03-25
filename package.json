@@ -17,14 +17,17 @@
     "@next/bundle-analyzer": "^13.1.6",
     "@next/font": "13.1.6",
     "@next/mdx": "^13.1.6",
+    "@signal-noise/react-shader-canvas": "^0.0.3",
     "dayjs": "^1.11.7",
     "fast-glob": "^3.2.12",
     "glob": "^8.1.0",
+    "glslCanvas": "^0.2.6",
     "gray-matter": "^4.0.3",
     "next": "13.1.6",
     "next-mdx-remote": "^4.3.0",
     "normalize.css": "^8.0.1",
     "prettier": "^2.8.3",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-use": "^17.4.0",
@@ -32,6 +35,7 @@
     "remark-reading-time": "^2.0.1"
   },
   "devDependencies": {
-    "@emotion/babel-plugin": "^11.10.5"
+    "@emotion/babel-plugin": "^11.10.5",
+    "raw-loader": "^4.0.2"
   }
 }

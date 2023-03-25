@@ -18,20 +18,20 @@ const fixel = localFont({
 export default function MyApp({ Component, pageProps }) {
   return (
     <>
-      <style jsx global>{`
-        html {
-          font-family: ${fixel.style.fontFamily};
-        }
-      `}</style>
-
       <ThemeProvider theme={theme}>
         <Global
           styles={{
             html: {
+              height: "100%",
               fontFamily: fixel.style.fontFamily,
             },
             body: {
+              height: "100%",
               color: theme.colors.text.primary,
+
+              "&>div#__next": {
+                height: "100%",
+              },
             },
           }}
         />
