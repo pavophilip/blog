@@ -12,47 +12,51 @@ const c2 = {
 const StyledSvg = styled.svg`
   cursor: pointer;
   z-index: 5;
-  overflow: visible;
   scale: 8;
-  margin-top: 100px;
+  margin-top: 200px;
 
   & > rect {
-    transform-origin: center;
-    transform-box: fill-box;
+    //transform-origin: center;
+    //transform-box: fill-box;
   }
 `;
 
 const BurgerMenu = memo(({ isOpen, onClick }) => {
   const first = useSpring({
-    to: async (next) => {
-      if (isOpen) {
-        await next({
-          transform: "translate(0px, 9px) rotate(0deg)",
-          config: c1,
-        });
-        await next({
-          transform: "translate(0px, 9px) rotate(-45deg)",
-          config: c2,
-        });
-      } else {
-        await next({
-          transform: "translate(0px, 9px) rotate(0deg)",
-          config: c1,
-        });
-        await next({
-          transform: "translate(0px, 0px) rotate(0deg)",
-          config: c2,
-        });
-      }
-    },
+    // to: async (next) => {
+    //   if (isOpen) {
+    //     await next({
+    //       transform: "translate(0px, 9px) rotate(0deg)",
+    //       config: c1,
+    //     });
+    //     await next({
+    //       transform: "translate(0px, 9px) rotate(-45deg)",
+    //       config: c2,
+    //     });
+    //   } else {
+    //     await next({
+    //       transform: "translate(0px, 9px) rotate(0deg)",
+    //       config: c1,
+    //     });
+    //     await next({
+    //       transform: "translate(0px, 0px) rotate(0deg)",
+    //       config: c2,
+    //     });
+    //   }
+    // },
   });
 
   const second = useSpring({
     to: {
-      opacity: isOpen ? 0 : 1,
+      transform: isOpen ? "rotate(-45deg)" : "rotate(0deg)",
     },
-    delay: !isOpen && 100,
-    config: c1,
+    config: config.wobbly,
+
+    // to: {
+    //   opacity: isOpen ? 0 : 1,
+    // },
+    // delay: !isOpen && 100,
+    // config: c1,
   });
 
   const third = useSpring({
@@ -97,7 +101,7 @@ const BurgerMenu = memo(({ isOpen, onClick }) => {
         width="24"
         height="2"
         rx="1"
-        fill={"#000025"}
+        fill={"#4F4F4F"}
         style={first}
       />
       <animated.rect
@@ -105,7 +109,7 @@ const BurgerMenu = memo(({ isOpen, onClick }) => {
         width="24"
         height="2"
         rx="1"
-        fill={"#000025"}
+        fill={"#4F4F4F"}
         style={second}
       />
       <animated.rect
@@ -113,8 +117,8 @@ const BurgerMenu = memo(({ isOpen, onClick }) => {
         width="24"
         height="2"
         rx="1"
-        fill={"#000025"}
-        style={third}
+        fill={"#4F4F4F"}
+        // style={third}
       />
     </StyledSvg>
   );

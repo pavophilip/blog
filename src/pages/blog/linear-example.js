@@ -1,0 +1,44 @@
+import styled from "@emotion/styled";
+import { animated, useSpring } from "react-spring";
+import { useState } from "react";
+
+const Container = styled.div`
+  padding: 32px;
+`;
+
+const Ball = animated(styled.div`
+  width: 100px;
+  height: 100px;
+  background-color: #4f4f4f;
+  border-radius: 50%;
+`);
+
+const SpringExample = () => {
+  const [x, setX] = useState(0);
+  const styles = useSpring({
+    from: {
+      x: 0,
+    },
+    to: {
+      x: 200,
+    },
+    loop: true,
+    config: {
+      duration: 1500,
+    },
+    onChange: ({ value }) => {
+      setX(value.x.toFixed(2));
+    },
+  });
+
+  return (
+    <Container>
+      <div>
+        <Ball style={styles} />
+      </div>
+      <pre>x: {x}</pre>
+    </Container>
+  );
+};
+
+export default SpringExample;
