@@ -14,7 +14,7 @@ const GalleryItemContainer = styled.div`
 const ShaderGalleryItem = ({ shader }) => {
   return (
     <GalleryItemContainer>
-      <ShaderCanvas height={300} width={300} fragShader={shader} />
+      <ShaderCanvas height={330} width={330} fragShader={shader} />
     </GalleryItemContainer>
   );
 };
