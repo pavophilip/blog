@@ -6,9 +6,9 @@ const ShaderCanvas = dynamic(() => import("./ShaderCanvas/ShaderCanvas"), {
 });
 
 const GalleryItemContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  //display: flex;
+  //align-items: center;
+  //justify-content: center;
 `;
 
 const ShaderGalleryItem = ({ shader }) => {
