@@ -10,7 +10,5 @@ void main(){
     vec3 yellow = vec3(1., 0.843, 0.);
     vec3 blue = vec3(0., 0.341, 0.718);
 
-    vec3 color = mix(yellow, blue, step(0.5, st.y));
-
-    gl_FragColor = vec4(color, 1.);
+    gl_FragColor = vec4(mix(yellow, blue, step(0.5, st.y)), 1.);
 }
