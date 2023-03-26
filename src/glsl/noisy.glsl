@@ -52,15 +52,6 @@ void main() {
     float m_dist = 1.;
     float nearestPoint = 1.;
 
-//    for (int i = 0; i < 4; i++) {
-//        float dist = distance(points[i], pixel);
-//
-//        if(dist < m_dist){
-//            m_dist = dist;
-//        }
-//    }
-
-//    pixel.y -= mouse.x;
     pixel *= scale;
 
 

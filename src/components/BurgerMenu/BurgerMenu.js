@@ -1,13 +1,6 @@
-import { animated, config, useSpring } from "react-spring";
+import { animated, config, useSprings } from "react-spring";
 import { memo } from "react";
 import styled from "@emotion/styled";
-
-const c1 = {
-  duration: 100,
-};
-const c2 = {
-  ...config.wobbly,
-};
 
 const StyledSvg = styled.svg`
   cursor: pointer;
@@ -22,66 +15,70 @@ const StyledSvg = styled.svg`
   }
 `;
 
-const BurgerMenu = memo(({ isOpen, onClick }) => {
-  const first = useSpring({
-    to: async (next) => {
-      if (isOpen) {
-        await next({
-          transform: "translate(0px, 9px) rotate(0deg)",
-          config: c1,
-        });
-        await next({
-          transform: "translate(0px, 9px) rotate(-45deg)",
-          config: c2,
-        });
-      } else {
-        await next({
-          transform: "translate(0px, 9px) rotate(0deg)",
-          config: c1,
-        });
-        await next({
-          transform: "translate(0px, 0px) rotate(0deg)",
-          config: c2,
-        });
-      }
-    },
+const linearConfig = {
+  duration: 100,
+};
+
+const topRect = async (next, isOpen) => {
+  // Stage 1
+  await next({
+    transform: isOpen
+      ? "translate(0px, 9px) rotate(0deg)"
+      : "translate(0px, 9px) rotate(0deg)",
+    config: linearConfig,
   });
 
-  const second = useSpring({
+  // Stage 2
+  await next({
+    transform: isOpen
+      ? "translate(0px, 9px) rotate(-45deg)"
+      : "translate(0px, 0px) rotate(0deg)",
+    config: config.wobbly,
+  });
+};
+
+const mediumRect = async (next, isOpen) => {
+  // Medium rect has only Stage 1
+  await next({
     to: {
       opacity: isOpen ? 0 : 1,
     },
+    // Make delay when isOpen changed from true to false
     delay: !isOpen && 100,
-    config: c1,
+    config: linearConfig,
+  });
+};
+
+const bottomRect = async (next, isOpen) => {
+  // Stage 1
+  await next({
+    transform: isOpen
+      ? "translate(0px, -9px) rotate(0deg)"
+      : "translate(0px, -9px) rotate(0deg)",
+    config: linearConfig,
   });
 
-  const third = useSpring({
-    to: async (next) => {
-      if (isOpen) {
-        await next({
-          transform: "translate(0px, -9px) rotate(0deg)",
-          config: c1,
-        });
-        await next({
-          transform: "translate(0px, -9px) rotate(-135deg)",
-          config: c2,
-        });
-      } else {
-        await next({
-          transform: "translate(0px, -9px) rotate(0deg)",
-          config: c1,
-        });
-        await next({
-          transform: "translate(0px, 0px) rotate(0deg)",
-          config: c2,
-        });
-      }
-    },
-    config: {
-      ...config.stiff,
-      tension: 300,
-    },
+  // Stage 2
+  await next({
+    transform: isOpen
+      ? "translate(0px, -9px) rotate(-135deg)"
+      : "translate(0px, 0px) rotate(0deg)",
+    config: config.wobbly,
   });
+};
+
+const rects = [topRect, mediumRect, bottomRect];
+
+const BurgerMenu = memo(({ isOpen, onClick }) => {
+  const [springs] = useSprings(
+    3,
+    (index) => ({
+      to: async (next) => {
+        await rects[index](next, isOpen);
+      },
+    }),
+    [isOpen]
+  );
 
   return (
     <StyledSvg
@@ -92,30 +89,19 @@ const BurgerMenu = memo(({ isOpen, onClick }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <animated.rect
-        y={"0"}
-        width="24"
-        height="2"
-        rx="1"
-        fill={"#4F4F4F"}
-        style={first}
-      />
-      <animated.rect
-        y="9"
-        width="24"
-        height="2"
-        rx="1"
-        fill={"#4F4F4F"}
-        style={second}
-      />
-      <animated.rect
-        y="18"
-        width="24"
-        height="2"
-        rx="1"
-        fill={"#4F4F4F"}
-        style={third}
-      />
+      {springs.map((props, index, args) => {
+        return (
+          <animated.rect
+            key={index}
+            y={index * 9}
+            width="24"
+            height="2"
+            rx="1"
+            fill={"#4F4F4F"}
+            style={props}
+          />
+        );
+      })}
     </StyledSvg>
   );
 });

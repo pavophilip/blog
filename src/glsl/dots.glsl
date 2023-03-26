@@ -47,12 +47,14 @@ void main(){
     mouse.x = u_mouse.x / u_resolution.y;
 
     vec4 bgColor = vec4(0., 0., 0., 0.);
-    vec4 dotColor = vec4(0.6, 0.6, 0.6, 1.);
-    vec4 redColor = vec4(1., 0.5, 0.6, 1.);
+    vec4 dotColor = vec4(0.9, 0.9, 0.9, 1.);
+    vec4 redColor = vec4(0., 0., 0., 1.);
 
-    float mouse_dist = distance(mouse, st);
+    vec2 center = vec2(0.5, 0.5);
 
-    float mouseAlpha = 1. - smoothstep(0., 0.1, mouse_dist);
+    float mouse_dist = distance(center, st);
+
+    float mouseAlpha = 1. - smoothstep(0., 0.5, mouse_dist);
 
     float radius = 0.1;
 
