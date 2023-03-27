@@ -5,6 +5,10 @@ precision mediump float;
 uniform vec2 u_resolution;
 uniform float u_time;
 
+float random (float x) {
+    return fract(sin(x) * 1.0);
+}
+
 float paint(vec2 st, float y){
     return 1. - smoothstep(y, y + 0.005, st.y);
 }
