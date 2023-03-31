@@ -11,10 +11,15 @@ const GalleryItemContainer = styled.div`
   //justify-content: center;
 `;
 
-const ShaderGalleryItem = ({ shader }) => {
+const ShaderGalleryItem = ({ shader, uniforms }) => {
   return (
     <GalleryItemContainer>
-      <ShaderCanvas height={330} width={330} fragShader={shader} />
+      <ShaderCanvas
+        height={330}
+        width={330}
+        fragShader={shader}
+        uniforms={uniforms}
+      />
     </GalleryItemContainer>
   );
 };
