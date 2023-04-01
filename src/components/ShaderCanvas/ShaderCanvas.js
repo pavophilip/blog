@@ -49,17 +49,25 @@ const ShaderCanvas = ({
   ]);
 
   return (
-    <canvas
-      {...props}
-      ref={canvas}
-      width={width * pixelDensity * superSample}
-      height={height * pixelDensity * superSample}
+    <div
       style={{
-        ...style,
-        width: `${width}px`,
-        height: `${height}px`,
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
       }}
-    />
+    >
+      <canvas
+        {...props}
+        ref={canvas}
+        width={width * pixelDensity * superSample}
+        height={height * pixelDensity * superSample}
+        style={{
+          ...style,
+          width: `100%`,
+          height: `100%`,
+        }}
+      />
+    </div>
   );
 };
 
