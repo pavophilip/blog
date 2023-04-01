@@ -2,6 +2,7 @@ import glslCanvas from "glslCanvas";
 import React, { useEffect, useRef } from "react";
 import { isWebGlSupported } from "@/utils/isWebGlSupported";
 import { getDevicePixelRatio } from "@/utils/getDevicePixelRatio";
+import useResizeObserver from "use-resize-observer";
 
 const ShaderCanvas = ({
   width,
@@ -17,6 +18,11 @@ const ShaderCanvas = ({
   const sandbox = useRef();
   const webGlSupported = isWebGlSupported();
   const pixelDensity = getDevicePixelRatio();
+  const {
+    ref,
+    width: containerWidth = 1,
+    height: containerHeight = 1,
+  } = useResizeObserver();
 
   // Spawn the glslCanvas
   useEffect(() => {
@@ -50,6 +56,7 @@ const ShaderCanvas = ({
 
   return (
     <div
+      ref={ref}
       style={{
         width: "100vw",
         height: "100vh",
@@ -63,8 +70,8 @@ const ShaderCanvas = ({
         height={height * pixelDensity * superSample}
         style={{
           ...style,
-          width: `100%`,
-          height: `100%`,
+          width: `${containerWidth}px`,
+          height: `${containerHeight}px`,
         }}
       />
     </div>
