@@ -29,8 +29,8 @@ const nextConfig = {
 
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push({
-      test: /\.(vert|frag|glsl)$/i,
-      loader: "raw-loader",
+      test: /\.glsl$/,
+      loader: "webpack-glsl-loader",
     });
 
     return config;

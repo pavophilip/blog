@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useMeasure } from "react-use";
 import { useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
-import dots from "@/glsl/dots.glsl";
+import dots from "../glsl/dots.glsl";
 
 const ShaderCanvas = dynamic(
   () => import("../components/ShaderCanvas/ShaderCanvas"),
